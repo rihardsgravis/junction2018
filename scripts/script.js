@@ -67,6 +67,22 @@ const crowdSpeakers = [
     Scene.root.find('crowd13_speaker'),
 ];
 
+const eeohSpeakers = [
+    Scene.root.find('speaker0'),
+    Scene.root.find('speaker1'),
+    Scene.root.find('speaker4'),
+    Scene.root.find('speaker5'),
+    Scene.root.find('speaker6'),
+    Scene.root.find('speaker7'),
+    Scene.root.find('speaker8'),
+    Scene.root.find('speaker9'),
+    Scene.root.find('speaker10'),
+    Scene.root.find('speaker11'),
+    Scene.root.find('speaker12'),
+    Scene.root.find('speaker13'),
+    Scene.root.find('speaker14'),
+];
+
 const ambienceRect = Scene.root.find('ambience');
 ambienceRect.material.opacity = Reactive.max(0.08, Reactive.div(FaceTracking.face(0).mouth.openness, 2.8));
 
@@ -127,12 +143,24 @@ FaceTracking.face(0).mouth.openness.gt(0.01).monitor().subscribe((e) => {
     }
 });
 
+eeohSpeakers[0].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[1].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[2].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[3].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[4].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[5].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[6].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[7].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[8].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[9].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[10].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[11].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+eeohSpeakers[12].volume = Reactive.min(Reactive.mul(FaceTracking.face(0).mouth.openness, 2), 1.0);
+
 FaceTracking.face(0).mouth.openness.monitor().subscribe((e) => {
     const volume = Math.min(Math.round(e.newValue * 100) / 100 * 2, 1);
     if (volume > peakVolume) {
         peakVolume = volume;
     }
-
-    Patches.setScalarValue('volume', volume);
 });
 
